@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
+import { BrowserRouter, Route, Switch, Link } from "react-router-dom";
+import Home from "./components/Home/Home";
+
+import Login from "./components/Login/Login";
 
 function App() {
+  const [token, setToken] = useState();
+  if (!token) {
+    return <Login setToken={setToken} />;
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    
+    <div className="wrapper">
+      <h1>Application</h1>
+      
+      <BrowserRouter>
+      <ul>
+        <li>
+          <Link to="/home">Home</Link>
+        </li>
+      </ul>
+        <Switch>
+          <Route path="/home">
+            <Home />
+          </Route>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
